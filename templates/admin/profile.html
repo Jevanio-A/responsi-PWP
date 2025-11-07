@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-header">
+  <h2>Profil Admin</h2>
+  <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary btn-sm">← Kembali</a>
+</div>
+
+<div class="card card-form shadow-sm p-4">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.bio.label(class="form-label") }}
+      {{ form.bio(class="form-control", rows="3") }}
+    </div>
+
+    <div class="mb-3">
+      <label for="photo" class="form-label">Foto Profil</label>
+      <input type="file" class="form-control" name="photo" id="photo">
+      {% if user.photo %}
+      <img src="{{ url_for('uploaded_file', filename=user.photo) }}" alt="Foto Profil" class="preview-img">
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+  </form>
+</div>
+{% endblock %}

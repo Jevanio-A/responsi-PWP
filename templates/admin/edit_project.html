@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-header">
+  <h2>{{ project and 'Edit Project' or 'Tambah Project' }}</h2>
+  <a href="{{ url_for('admin_projects') }}" class="btn btn-secondary btn-sm">← Kembali</a>
+</div>
+
+<div class="card card-form shadow-sm p-4">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.title.label(class="form-label") }}
+      {{ form.title(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.description.label(class="form-label") }}
+      {{ form.description(class="form-control", rows="4") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.link.label(class="form-label") }}
+      {{ form.link(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Gambar Project</label>
+      <input type="file" class="form-control" name="image" id="image">
+      {% if project and project.image %}
+      <img src="{{ url_for('uploaded_file', filename=project.image) }}" class="preview-img">
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+  </form>
+</div>
+{% endblock %}

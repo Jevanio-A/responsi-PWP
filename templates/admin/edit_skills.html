@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-header">
+  <h2>{{ skill and 'Edit Skill' or 'Tambah Skill' }}</h2>
+  <a href="{{ url_for('admin_skills') }}" class="btn btn-secondary btn-sm">← Kembali</a>
+</div>
+
+<div class="card card-form shadow-sm p-4">
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.level.label(class="form-label") }}
+      {{ form.level(class="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+  </form>
+</div>
+{% endblock %}

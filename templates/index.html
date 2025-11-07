@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-5">
+    {% if user.photo %}
+    <img src="{{ url_for('uploaded_file', filename=user.photo) }}" class="rounded-circle mb-3" width="120" height="120">
+    {% endif %}
+    <h1>{{ user.name }}</h1>
+    <p class="lead">{{ user.bio }}</p>
+</div>
+
+<h3 class="mb-4">💼 Projects</h3>
+<div class="row">
+    {% for project in projects %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            {% if project.image %}
+            <img src="{{ url_for('uploaded_file', filename=project.image) }}" class="card-img-top" alt="{{ project.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text text-truncate">{{ project.description }}</p>
+                <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-outline-primary btn-sm">Detail</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h3 class="mt-5 mb-3">🧠 Skills</h3>
+<div class="row">
+    {% for skill in skills %}
+    <div class="col-md-3 mb-3">
+        <div class="card p-3 text-center shadow-sm">
+            <h6 class="mb-1">{{ skill.name }}</h6>
+            <small class="text-muted">{{ skill.level }}</small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
